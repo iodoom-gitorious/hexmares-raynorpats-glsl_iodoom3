@@ -21,7 +21,7 @@ void main( void ) {
 	
 	// compute normal from normal map, move from [0,1] to  [-1, 1] range, normalize 
 	// NOTE: this is agb due to the RXGB compression technique used 
-	vec3 N = normalize( ( 2.0 * texture2D ( u_normalTexture, var_TexNormal.st ).agb ) - 0.5 ); 
+	vec3 N = normalize( ( 2.0 * texture2D ( u_normalTexture, var_TexNormal.st ).agb ) - 1.0 ); 
 	N = var_TangentBinormalNormalMatrix * N;  
 
 	// compute N dot L
