@@ -27,9 +27,7 @@ uniform vec4				u_colorAdd;
 void main( void ) {      
     // mvp transform into clip space      
 	gl_Position = ftransform( );  
- 
-	// transform position into world space  
-	var_Position = ( u_modelMatrix * gl_Vertex ).xyz; 
+	var_Position = gl_Vertex.xyz; 
  
 	// normal map texgen   
 	var_TexNormal.x = dot( u_bumpMatrixS, attr_TexCoord );

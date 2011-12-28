@@ -29,10 +29,8 @@ uniform vec4				u_colorAdd;
    
 void main( void ) {          
     // transform vertex position into homogenous clip-space   
-	gl_Position = ftransform();  
-  
-	// transform vertex position into world space   
-	var_Position = normalize( u_modelMatrix * gl_Vertex ).xyz; 
+	gl_Position = ftransform();
+	var_Position = gl_Vertex.xyz;
 
 	// normal map texgen   
 	var_TexNormal.x = dot( u_bumpMatrixS, attr_TexCoord );

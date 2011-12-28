@@ -27,15 +27,12 @@ vec4 lightingModel( vec4 diffuseTerm, vec3 specularTerm, vec3 L, vec3 N, vec3 H 
 	float NdotH = pow( clamp( dot( N, H ), 0.0, 1.0 ), 16 );   
   
 	vec4 diffuseLighting = ( diffuseTerm * NdotL ); 
-  
 	vec3 specularLighting = ( specularTerm * NdotH );   
-	if (NdotL <= 0) 
-		specularLighting = vec3(0.0);
  
 	return diffuseLighting + vec4( specularLighting.rgb, 1.0 );  
 #else 
 	// traditional lambertian blinn-phong lighting model
-	float NdotL = clamp( dot( N, L ), 0.0, 1.0 );  
+	float NdotL = max( dot( N, L ), 0.0); 
 	float NdotH = pow( clamp( dot( N, H ), 0.0, 1.0 ), 16 );  
 
 	return ( diffuseTerm * NdotL ) + vec4( specularTerm * NdotH, 1.0 );   

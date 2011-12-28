@@ -23,14 +23,11 @@ void main( void ) {
 	// NOTE: this is agb due to the RXGB compression technique used 
 	vec3 N = normalize( ( 2.0 * texture2D ( u_normalTexture, var_TexNormal.st ).agb ) - 1.0 ); 
 	N = var_TangentBinormalNormalMatrix * N;  
-
-	// compute N dot L
-	float NdotL = clamp( dot( N, L ), 0.0, 1.0 ); 
  
 	// compute the diffuse term     
 	vec4 diffuse = texture2D( u_diffuseTexture, var_TexDiffuse );     
 	diffuse *= u_diffuseColor; 
-	diffuse *= NdotL;
+	diffuse *= max( dot( N, L ), 0.0 ); 
     
 	// compute light projection and falloff 
 	vec3 lightFalloff = texture2D( u_lightFalloffTexture, vec2( var_TexLight.z, 0.5 ) ).rgb;       
